@@ -1,4 +1,4 @@
-require '../test_helper'
+require 'test_helper'
 
 class PdfDeliveryTest < ActionDispatch::IntegrationTest
    test "pdf request sends pdf as a file" do
