@@ -1,6 +1,10 @@
 module MailForm
   class Base
+    include ActiveModel::Conversion
+    extend ActiveModel::Naming
+    extend ActiveModel::Translation
     include ActiveModel::AttributeMethods
+    include ActiveModel::Validations
     attribute_method_prefix 'clear_'
     attribute_method_suffix '?'
 
@@ -16,5 +20,10 @@ module MailForm
     def attribute?(attribute)
       send(attribute).present?
     end
+
+    def persisted?
+      false
+    end
+
   end
 end
