@@ -37,4 +37,17 @@ class MailFormTest < ActiveSupport::TestCase
     sample_mail.email = ""
     assert !sample_mail.email?
   end
+
+  test "delivers email with attributes" do
+    sample_mail = SampleMail.new
+    sample_mail.email = 'user@example.com'
+
+    sample_mail.deliver
+
+    assert_equal 1, ActionMailer::Base.deliveries.size
+    mail = ActionMailer::Base.deliveries.last
+
+    assert_equal ["user@example.com"], mail.from
+    assert_match "Email: user@example.com", mail.body.encoded
+  end
 end
