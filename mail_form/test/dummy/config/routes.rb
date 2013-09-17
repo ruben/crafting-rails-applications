@@ -53,4 +53,7 @@ Dummy::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resources :contact_forms, only: :create
+  root to: 'contact_forms#new'
 end

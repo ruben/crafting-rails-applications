@@ -28,6 +28,12 @@ module MailForm
       false
     end
 
+    def initialize(attributes = {})
+      attributes.each do |key, value|
+        self.public_send("#{key}=", value)
+      end if attributes
+    end
+
     def deliver
       if valid?
         MailForm::Notifier.contact(self).deliver
