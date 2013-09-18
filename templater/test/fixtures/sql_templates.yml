@@ -42,3 +42,24 @@ users_index:
          <br>
 
          <%%= link_to 'New User', new_user_path %>"
+cms_layout:
+  id: 3
+  path: "layouts/cms"
+  format: "html"
+  locale: "en"
+  handler: "erb"
+  partial: false
+  body: "<!DOCTYPE html>
+         <html>
+         <head>
+           <title>Templater</title>
+           <%%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+           <%%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+         </head>
+         <body>
+         
+         <%%= yield %>
+         
+         </body>
+         </html>
+"
