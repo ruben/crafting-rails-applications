@@ -3,7 +3,7 @@
 one:
   id: 1
   body: "body"
-  path: "some/path"
+  path: "posts/create"
   format: "html"
   locale: "en"
   handler: "erb"
