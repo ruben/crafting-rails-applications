@@ -8,4 +8,9 @@ class RenderingTest < ActionDispatch::IntegrationTest
     get "/handlers/string_handler"
     assert_match "Congratulations! You just created another template handler!", response.body
   end
+
+  test ".md template handler" do
+    get "handlers/markdown_handler"
+    assert_match "<p>RDiscount is <em>cool</em> and <strong>fast</strong>!</p>", response.body
+  end
 end
