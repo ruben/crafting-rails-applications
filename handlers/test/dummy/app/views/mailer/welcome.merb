@@ -1,0 +1,3 @@
+Mailer#welcome
+
+<%=@greeting %> Find me in app/views/app/views/mailer/welcome.merb
