@@ -7,13 +7,18 @@ module LiveAssets
 
   mattr_reader :subscribers
   @@subscribers = []
+  @@mutex = Mutex.new
 
   def self.subscribe(subscriber)
-    subscribers << subscriber
+    @@mutex.synchronize do
+      subscribers << subscriber
+    end
   end
 
   def self.unsubscribe(subscriber)
-    subscribers.delete(subscriber)
+    @@mutex.synchronize do
+      subscribers.delete(subscriber)
+    end
   end
 
   def self.start_listener(event, directories)
@@ -27,9 +32,17 @@ module LiveAssets
   def self.start_timer(event, time)
     Thread.new do
       while true
-        subscribers.each { |s| s << event}
+        subscribers.each { |s| s << event }
         sleep time
       end
     end
+  end
+end
+
+module LiveAssets
+  extend ActiveSupport::Autoload
+
+  eager_autoload do
+    autoload :SSESubscriber
   end
 end
